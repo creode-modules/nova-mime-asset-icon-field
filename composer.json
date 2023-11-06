@@ -1,5 +1,5 @@
 {
-    "name": "creode/mimetypeassetfield",
+    "name": "creode/nova-mime-asset-icon-field",
     "description": "Mime Asset Icon Field for Laravel Nova",
     "keywords": [
         "laravel",
