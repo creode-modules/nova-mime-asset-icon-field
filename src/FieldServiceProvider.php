@@ -2,8 +2,8 @@
 
 namespace Creode\MimeTypeAssetField;
 
+use Creode\LaravelMimeTypeIcons\Services\LaravelMimeTypeIconsService;
 use Illuminate\Support\ServiceProvider;
-use Laravel\Nova\Events\ServingNova;
 use Laravel\Nova\Nova;
 
 class FieldServiceProvider extends ServiceProvider
@@ -15,10 +15,11 @@ class FieldServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Nova::serving(function (ServingNova $event) {
+        Nova::serving(function () {
             Nova::script('MimeTypeAssetField', __DIR__.'/../dist/js/field.js');
-            Nova::style('MimeTypeAssetField', __DIR__.'/../dist/css/field.css');
         });
+
+        $this->publishConfig();
     }
 
     /**
@@ -28,6 +29,14 @@ class FieldServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
+    }
+
+    public function publishConfig()
+    {
+
+        $this->publishes([
+            __DIR__ . '/../config/nova-mime-type-icon.php' => config_path('nova-mime-type-icon.php'),
+        ], 'nova-mime-type-icon-config');
     }
 }

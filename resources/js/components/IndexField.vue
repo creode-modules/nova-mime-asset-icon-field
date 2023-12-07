@@ -1,18 +1,14 @@
 <template>
-    <SVGIcon :icon="fieldValue" icon-style="square-o" />
+    <img :src="fieldValue" alt="" width="40" height="40">
 </template>
 
 <script>
-import SVGIcon from './SVGIcon'
 export default {
   props: ['resourceName', 'field'],
-  components: {
-    SVGIcon,
-  },
 
   computed: {
     fieldValue() {
-        return this.field.displayedAs || this.field.value
+      return this.field.displayedAs || this.field.value
     },
   },
 
