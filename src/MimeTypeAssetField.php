@@ -2,8 +2,8 @@
 
 namespace Creode\MimeTypeAssetField;
 
+use Creode\LaravelMimeTypeIcons\Services\LaravelMimeTypeIconsService;
 use Laravel\Nova\Fields\Field;
-use Laravel\Nova\Http\Requests\NovaRequest;
 
 class MimeTypeAssetField extends Field
 {
@@ -14,13 +14,16 @@ class MimeTypeAssetField extends Field
      */
     public $component = 'MimeTypeAssetField';
 
+    public function iconStyle($iconStyle = 'square-o')
+    {
+        return $this->withMeta(['iconStyle' => $iconStyle]);
+    }
 
-    // Replace '/' with '-' in field value
     public function resolveAttribute($resource, $attribute = null)
     {
         $value = parent::resolveAttribute($resource, $attribute);
 
-        return str_replace(['/', '.'], '-', $value);
+        return LaravelMimeTypeIconsService::getIcon($value);
     }
 
 }
